@@ -2,13 +2,30 @@ if status is-interactive
 end
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-
 {{- if eq .chezmoi.os "darwin" }}
 export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
 export EDITOR="/opt/homebrew/bin/nvim"
 export VISUAL="/opt/homebrew/bin/nvim"
+{{- end }}
+{{- if eq .work true }}
+export REQUESTS_CA_BUNDLE="$HOME/Documents/certs.pem"
+export SSL_CERT_FILE="$HOME/Documents/certs.pem"
+export VAULT_CAPATH="$HOME/Documents/certs.pem"
+export NODE_EXTRA_CA_CERTS="$HOME/Documents/certs.pem"
+{{- end }}
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.rye/shims"
+export PATH="$HOME/.moon/bin:$PATH"
+export PATH="$HOME/.proto/bin:$PATH"
+{{- if eq .chezmoi.os "darwin" }}
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts"
+export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin"
 {{- end }}
 
 alias vi="nvim"
@@ -22,20 +39,6 @@ alias gs="git status"
 alias c="cargo"
 alias z="zellij"
 
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.rye/shims"
-export PATH="$HOME/.moon/bin:$PATH"
-export PATH="$HOME/.proto/bin:$PATH"
-
-{{- if eq .chezmoi.os "darwin" }}
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PATH="$PATH:/opt/homebrew/bin"
-export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts"
-export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin"
-{{- end }}
-
 # pnpm
 set -gx PNPM_HOME "~/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
@@ -44,3 +47,19 @@ set -gx PATH "$PNPM_HOME" $PATH
 function cdp
     cd ~/projects/
 end
+
+{{- if eq .work true }}
+function setproxy
+    export {all,http,https,ftp}_proxy="http://oproxy.fg.rbc.com:8080"
+    export {ALL,HTTP,HTTPS,FTP}_PROXY="http://oproxy.fg.rbc.com:8080"
+    export NO_PROXY="127.0.0.*,172.*,192.168.*,*.fg.rbc.com,*.devfg.rbc.com,*.saifg.rbc.com,localhost"
+    export no_proxy="$NO_PROXY"
+end
+
+function unsetproxy
+    set -e {all,http,https,ftp}_proxy
+    set -e {ALL,HTTP,HTTPS,FTP}_PROXY
+end
+
+setproxy
+{{- end }}
