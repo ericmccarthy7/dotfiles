@@ -1,0 +1,26 @@
+import = ["~/.config/alacritty/rose-pine.toml"]
+
+[font]
+size = 16
+
+[font.bold]
+family = "Noto Sans Mono"
+style = "Medium"
+
+[font.italic]
+family = "Noto Sans Mono"
+style = "Light"
+
+[font.normal]
+family = "Noto Sans Mono"
+style = "Light"
+
+{{- if eq .chezmoi.os "darwin" }}
+[shell]
+program = "/opt/homebrew/bin/fish"
+
+{{- end}}
+
+[window]
+decorations = "none"
+startup_mode = "Maximized"

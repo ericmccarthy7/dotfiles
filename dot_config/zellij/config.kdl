@@ -1,0 +1,76 @@
+keybinds {
+    unbind "Ctrl o"
+    normal clear-defaults=true {
+        bind "Ctrl b" { SwitchToMode "Tmux"; }
+    }
+    locked {
+        bind "Ctrl g" { SwitchToMode "Normal"; }
+    }
+    tmux {
+        bind "[" { SwitchToMode "Scroll"; }
+        bind "Ctrl b" { Write 2; SwitchToMode "Normal"; }
+        bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "%" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "c" { NewTab; SwitchToMode "Normal"; }
+        bind "," { SwitchToMode "RenameTab"; }
+        bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "n" { GoToNextTab; SwitchToMode "Normal"; }
+        bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        bind "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "o" { FocusNextPane; }
+        bind "d" { Detach; }
+        bind "Space" { NextSwapLayout; }
+        bind "x" { CloseFocus; SwitchToMode "Normal"; }
+    }
+    shared_except "locked" {
+        bind "Ctrl g" { SwitchToMode "Locked"; }
+    }
+    shared_except "normal" "locked" {
+        bind "Enter" "Esc" { SwitchToMode "Normal"; }
+    }
+    shared_except "tmux" "locked" {
+        bind "Ctrl b" { SwitchToMode "Tmux"; }
+    }
+}
+
+plugins {
+    tab-bar { path "tab-bar"; }
+    status-bar { path "status-bar"; }
+    strider { path "strider"; }
+    compact-bar { path "compact-bar"; }
+}
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
+
+themes {
+    rose-pine {
+        bg "#403d52"
+        fg "#e0def4"
+        red "#eb6f92"
+        green "#31748f"
+        blue "#9ccfd8"
+        yellow "#f6c177"
+        magenta "#c4a7e7"
+        orange "#fe640b"
+        cyan "#ebbcba"
+        black "#26233a"
+        white "#e0def4"
+    }
+}
+
+default_shell "fish"
+pane_frames false
+theme "rose-pine"
+default_layout "compact"
+simplified_ui true

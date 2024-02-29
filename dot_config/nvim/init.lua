@@ -1,0 +1,285 @@
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
+
+vim.opt.hidden = true
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.list = true
+vim.opt.listchars = 'tab:..,trail:_,extends:>,precedes:<,nbsp:~'
+vim.opt.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.textwidth = 80
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.undofile = true
+vim.opt.backupcopy = "yes"
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.foldenable = false
+vim.opt.foldmethod = 'manual'
+vim.opt.foldlevelstart = 99
+vim.opt.swapfile = false
+vim.opt.clipboard = vim.opt.clipboard + "unnamed,unnamedplus"
+
+
+vim.keymap.set('n', '<leader>f', '<cmd>Files<cr>')
+vim.keymap.set('n', '<leader>r', '<cmd>Rg<cr>')
+vim.keymap.set('n', '<leader>b', '<cmd>Buffers<cr>')
+vim.keymap.set('n', '<leader>.', '<cmd>Oil<cr>')
+vim.keymap.set('n', '<leader>vrc', '<cmd>e $MYVIMRC<cr>')
+
+vim.keymap.set('ia', 'dts', vim.fn.strftime("%Y-%m-%d"))
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd("colorscheme rose-pine")
+			require("rose-pine").setup({
+				variant = "dark"
+			})
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			local configs = require("nvim-treesitter.configs")
+			require 'nvim-treesitter.configs'.setup {
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown" },
+				sync_install = false,
+			}
+		end
+	},
+	{
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end,
+	},
+	{
+		'junegunn/fzf.vim',
+		dependencies = {
+			'junegunn/fzf',
+		},
+		config = function()
+			vim.g.fzf_layout = { down = '~25%' }
+			vim.g.fzf_preview_window = {}
+		end
+	},
+
+
+	{
+		'vimwiki/vimwiki',
+		init = function()
+			vim.g.vimwiki_list = {
+				{
+					syntax = 'markdown',
+					ext = '.md',
+				}
+			}
+			vim.g.vim_markdown_new_list_item_indent = 0
+		end
+	},
+	{
+		'neovim/nvim-lspconfig',
+		config = function()
+			local lspconfig = require('lspconfig')
+			-- rust
+			lspconfig.rust_analyzer.setup {
+				-- `:help lspconfig-setup`
+				settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							allFeatures = true,
+						},
+						imports = {
+							group = {
+								enable = false,
+							},
+						},
+						completion = {
+							postfix = {
+								enable = false,
+							},
+						},
+					},
+				},
+			}
+
+			-- python
+			lspconfig.pyright.setup {}
+
+			-- javascript
+			lspconfig.tsserver.setup {
+				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+			}
+
+			-- vuejs
+			lspconfig.volar.setup {}
+
+			-- lua
+			lspconfig.lua_ls.setup {
+				settings = {
+					Lua = {
+						runtime = {
+							-- Tell the language server which version of Lua you're using
+							-- (most likely LuaJIT in the case of Neovim)
+							version = 'LuaJIT',
+						},
+						diagnostics = {
+							-- Get the language server to recognize the `vim` global
+							globals = {
+								'vim',
+								'require'
+							},
+						},
+						workspace = {
+							-- Make the server aware of Neovim runtime files
+							library = vim.api.nvim_get_runtime_file("", true),
+						},
+						-- Do not send telemetry data containing a randomized but unique identifier
+						telemetry = {
+							enable = false,
+						},
+					},
+				},
+			}
+
+			-- yaml
+			lspconfig.yamlls.setup {
+				settings = {
+					yaml = {
+						format = {
+							enable = true
+						}
+					}
+				}
+			}
+
+			-- json
+			lspconfig.jsonls.setup {}
+
+			vim.api.nvim_create_autocmd('LspAttach', {
+				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+				callback = function(ev)
+					-- Enable completion triggered by <c-x><c-o>
+					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+					local opts = { buffer = ev.buf }
+					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+					vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+					vim.keymap.set('n', 'gR', vim.lsp.buf.rename, opts)
+					vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+					vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
+					vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
+					-- format on save python
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						pattern = { "*.py" },
+						callback = function()
+							vim.cmd("Black")
+						end
+					})
+
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						pattern = { "*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.yaml", "*.yml", "*.json" },
+						callback = function()
+							vim.lsp.buf.format { async = false }
+						end
+					})
+				end,
+
+			})
+		end
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		-- load cmp on InsertEnter
+		event = "InsertEnter",
+		-- these dependencies will only be loaded when cmp loads
+		-- dependencies are always lazy-loaded unless specified otherwise
+		dependencies = {
+			'neovim/nvim-lspconfig',
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-vsnip",
+			"hrsh7th/vim-vsnip",
+		},
+		config = function()
+			local cmp = require 'cmp'
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						vim.fn["vsnip#anonymous"](args.body)
+					end,
+				},
+				mapping = cmp.mapping.preset.insert({
+					['<C-b>'] = cmp.mapping.scroll_docs(-4),
+					['<C-f>'] = cmp.mapping.scroll_docs(4),
+					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-e>'] = cmp.mapping.abort(),
+					['<CR>'] = cmp.mapping.confirm({ select = true }),
+					['<C-y>'] = cmp.mapping.confirm({ select = true }),
+				}),
+				sources = cmp.config.sources({
+					{ name = 'nvim_lsp' },
+				}, {
+					{ name = 'path' },
+				}),
+				experimental = {
+					ghost_text = true,
+				},
+			})
+			cmp.setup.cmdline(':', {
+				sources = cmp.config.sources({
+					{ name = 'path' }
+				})
+			})
+		end
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		lazy = false,
+		dependencies = {
+			'rose-pine/neovim',
+		},
+		config = function()
+			require 'lualine'.setup {
+				options = {
+					theme = "rose-pine-alt",
+					icons_enabled = false,
+					section_separators = "",
+					component_separators = "",
+				}
+			}
+		end
+	},
+	{ "psf/black" },
+	{ "tpope/vim-commentary" },
+	{ "tpope/vim-fugitive" },
+	{ "tpope/vim-obsession" },
+	{ "tpope/vim-repeat" },
+	{ "tpope/vim-rhubarb" },
+	{ "tpope/vim-sleuth" },
+	{ "tpope/vim-surround" },
+})
