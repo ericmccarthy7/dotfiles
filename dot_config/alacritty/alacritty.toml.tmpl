@@ -18,7 +18,7 @@ style = "Light"
 {{if eq .chezmoi.os "darwin" }}
 [shell]
 program = "{{- .brew_home }}/bin/fish"
-{{end}}
+{{- end}}
 
 [window]
 decorations = "none"
