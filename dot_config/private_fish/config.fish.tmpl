@@ -3,11 +3,12 @@ end
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 {{- if eq .chezmoi.os "darwin" }}
-export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
-export EDITOR="/opt/homebrew/bin/nvim"
-export VISUAL="/opt/homebrew/bin/nvim"
+export BREW_HOME="{{- .brew_home }}"
+export LDFLAGS="-L$BREW_HOME/opt/openssl@3/lib"
+export CPPFLAGS="-I$BREW_HOME/opt/openssl@3/include"
+export PKG_CONFIG_PATH="$BREW_HOME/opt/openssl@3/lib/pkgconfig"
+export EDITOR="$BREW_HOME/bin/nvim"
+export VISUAL="$BREW_HOME/bin/nvim"
 {{- end }}
 {{- if eq .work true }}
 export REQUESTS_CA_BUNDLE="$HOME/Documents/certs.pem"
@@ -22,8 +23,8 @@ export PATH="$PATH:$HOME/.rye/shims"
 export PATH="$HOME/.moon/bin:$PATH"
 export PATH="$HOME/.proto/bin:$PATH"
 {{- if eq .chezmoi.os "darwin" }}
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$BREW_HOME/opt/libpq/bin:$PATH"
+export PATH="$PATH:$BREW_HOME/bin"
 export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts"
 export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin"
 {{- end }}
