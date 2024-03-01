@@ -7,6 +7,7 @@ keybinds {
         bind "Ctrl g" { SwitchToMode "Normal"; }
     }
     tmux {
+        bind "s" { SwitchToMode "Scroll"; }
         bind "[" { SwitchToMode "Scroll"; }
         bind "Ctrl b" { Write 2; SwitchToMode "Normal"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }

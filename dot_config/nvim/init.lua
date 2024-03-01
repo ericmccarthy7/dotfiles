@@ -14,7 +14,7 @@ vim.opt.textwidth = 80
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.undofile = true
+vim.opt.undofile = false
 vim.opt.backupcopy = "yes"
 vim.opt.wrap = true
 vim.opt.linebreak = true
@@ -73,7 +73,11 @@ require("lazy").setup({
 	{
 		"stevearc/oil.nvim",
 		config = function()
-			require("oil").setup()
+			require("oil").setup({
+				view_options = {
+					show_hidden = true
+				}
+			})
 		end,
 	},
 	{
