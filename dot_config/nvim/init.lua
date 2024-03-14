@@ -137,6 +137,8 @@ require("lazy").setup({
 			lspconfig.tsserver.setup {
 				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 			}
+			
+			lspconfig.astro.setup {}
 
 			-- vuejs
 			lspconfig.volar.setup {}
