@@ -191,6 +191,9 @@ require("lazy").setup({
 			-- angular
 			lspconfig.angularls.setup {}
 
+			-- html
+			lspconfig.html.setup {}
+
 			vim.api.nvim_create_autocmd('LspAttach', {
 				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 				callback = function(ev)
@@ -213,7 +216,7 @@ require("lazy").setup({
 					})
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = { "*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.yaml", "*.yml", "*.json", "*.mjs" },
+						pattern = { "*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.yaml", "*.yml", "*.json", "*.mjs", "*.html" },
 						callback = function()
 							vim.lsp.buf.format { async = false }
 						end
