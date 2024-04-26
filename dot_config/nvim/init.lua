@@ -137,7 +137,7 @@ require("lazy").setup({
 			lspconfig.tsserver.setup {
 				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 			}
-			
+
 			lspconfig.astro.setup {}
 
 			-- vuejs
@@ -213,7 +213,7 @@ require("lazy").setup({
 					})
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = { "*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.yaml", "*.yml", "*.json" },
+						pattern = { "*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.yaml", "*.yml", "*.json", ".mjs" },
 						callback = function()
 							vim.lsp.buf.format { async = false }
 						end
