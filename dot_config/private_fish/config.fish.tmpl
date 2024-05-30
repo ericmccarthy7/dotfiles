@@ -26,6 +26,7 @@ export PATH="$HOME/.proto/shims:$PATH"
 {{- if eq .chezmoi.os "darwin" }}
 export PATH="$BREW_HOME/opt/libpq/bin:$PATH"
 export PATH="$BREW_HOME/bin:$PATH"
+export PATH="$BREW_HOME/sbin:$PATH"
 export PATH="/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
 export PATH="/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin:$PATH"
 {{- end }}
