@@ -18,16 +18,16 @@ export NODE_EXTRA_CA_CERTS="$HOME/Documents/certs.pem"
 {{- end }}
 
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.rye/shims"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.rye/shims:$PATH"
 export PATH="$HOME/.moon/bin:$PATH"
 export PATH="$HOME/.proto/bin:$PATH"
 export PATH="$HOME/.proto/shims:$PATH"
 {{- if eq .chezmoi.os "darwin" }}
 export PATH="$BREW_HOME/opt/libpq/bin:$PATH"
-export PATH="$PATH:$BREW_HOME/bin"
-export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts"
-export PATH="$PATH:/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin"
+export PATH="$BREW_HOME/bin:$PATH"
+export PATH="/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+export PATH="/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin:$PATH"
 {{- end }}
 
 alias vi="nvim"
