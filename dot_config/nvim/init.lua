@@ -73,6 +73,7 @@ require("lazy").setup({
 			}
 		end
 	},
+	{ "nvim-treesitter/nvim-treesitter-context" },
 	{
 		"stevearc/oil.nvim",
 		config = function()
