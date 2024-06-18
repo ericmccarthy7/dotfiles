@@ -298,7 +298,26 @@ require("lazy").setup({
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-obsession" },
 	{ "tpope/vim-repeat" },
-	{ "tpope/vim-rhubarb" },
+	{
+		"tpope/vim-rhubarb",
+		config = function()
+			vim.api.nvim_create_user_command(
+				"Browse",
+				function(opts)
+					{{- if eq .chezmoi.os "darwin" }}
+					vim.fn.system { "open", opts.fargs[1] }
+					{{- end }}
+					{{- if eq .chezmoi.os "linux" }}
+					vim.fn.system { "xdg-open", opts.fargs[1] }
+					{{- end }}
+				end,
+				{ nargs = 1 }
+			)
+			{{- if eq .work true }}
+			vim.g.github_enterprise_urls = { "https://rbcgithub.fg.rbc.com" }
+			{{- end }}
+		end
+	},
 	{ "tpope/vim-sleuth" },
 	{ "tpope/vim-surround" },
 })
