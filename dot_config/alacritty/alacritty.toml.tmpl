@@ -1,7 +1,7 @@
 import = ["~/.config/alacritty/rose-pine.toml"]
 
 [font]
-size = 16
+size = 11
 
 [font.bold]
 family = "Noto Sans Mono"
@@ -18,6 +18,11 @@ style = "SemiCondensed Light"
 {{if eq .chezmoi.os "darwin" }}
 [shell]
 program = "{{- .brew_home }}/bin/fish"
+{{- end}}
+
+{{if eq .chezmoi.os "linux" }}
+[shell]
+program = "/usr/bin/fish"
 {{- end}}
 
 [window]
