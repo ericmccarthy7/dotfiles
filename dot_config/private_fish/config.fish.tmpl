@@ -1,7 +1,6 @@
 if status is-interactive
 end
 
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 {{- if eq .chezmoi.os "darwin" }}
 export BREW_HOME="{{- .brew_home }}"
 export LDFLAGS="-L$BREW_HOME/opt/openssl@3/lib"
