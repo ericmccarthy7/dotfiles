@@ -29,11 +29,8 @@ export PATH="/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin:$
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 export PATH="$HOME/bin:$PATH"
-export PATH="/opt/nvim-linux64/bin:$PATH"
-export PATH="$HOME/.pyenv/bin:$PATH"
-export EDITOR="/opt/nvim-linux64/bin/nvim"
-export VISUAL="/opt/nvim-linux64/bin/nvim"
-pyenv init - | source
+export EDITOR="nvim"
+export VISUAL="nvim"
 {{- end }}
 
 alias vi="nvim"
