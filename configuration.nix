@@ -76,7 +76,7 @@ in
 
   services.xserver = {
     enable = true;
-    displayManager.setupCommands = "xrandr --output DP-2 --off";
+    displayManager.setupCommands = "xrandr --output DP-1 --primary";
   };
 
   services.libinput.mouse.accelProfile = "flat";
@@ -119,7 +119,6 @@ in
       };
       cursorTheme = {
         name = "BreezeX-RosePine-Linux";
-        package = pkgs.rose-pine-cursor;
 	size = 24;
       };
     };
