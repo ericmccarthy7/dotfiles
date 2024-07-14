@@ -43,6 +43,7 @@ in
     fuzzel
     fzf
     google-chrome
+    hyprlock
     kdePackages.polkit-kde-agent-1
     kdePackages.qtwayland
     libsForQt5.qt5.qtwayland
@@ -59,6 +60,7 @@ in
     readline
     ripgrep
     rose-pine-cursor
+    ruff
     rustup
     spotify
     tealdeer
