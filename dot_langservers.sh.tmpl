@@ -1,11 +1,5 @@
 #!/bin/bash
 
-{{if eq .chezmoi.os "linux" }}
-curl -LO https://github.com/LuaLS/lua-language-server/releases/download/3.9.3/lua-language-server-3.9.3-linux-x64.tar.gz
-sudo rm -rf /opt/lua-language-server-*
-sudo tar -C /opt -xzf lua-language-server-3.9.3-linux-x64.tar.gz
-{{- end}}
-
 {{if eq .chezmoi.os "darwin" }}
 brew install lua-language-server
 {{- end}}
