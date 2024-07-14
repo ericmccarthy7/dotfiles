@@ -31,42 +31,43 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = [ 
-    pkgs.adwaita-qt
-    pkgs.alacritty
-    pkgs.clang
-    pkgs.corepack_22
-    pkgs.chezmoi
-    pkgs.dunst
-    pkgs.eza
-    pkgs.fuzzel
-    pkgs.fzf
-    pkgs.google-chrome
-    pkgs.kdePackages.polkit-kde-agent-1
-    pkgs.kdePackages.qtwayland
-    pkgs.libsForQt5.qt5.qtwayland
-    pkgs.gnumake
-    pkgs.lua-language-server
-    pkgs.neovim
-    pkgs.nodejs_22
-    pkgs.nwg-look
-    pkgs.openssl
-    pkgs.playerctl
-    pkgs.python312
-    pkgs.python312Packages.pynvim
-    pkgs.python312Packages.black
-    pkgs.readline
-    pkgs.ripgrep
-    pkgs.rose-pine-cursor
-    pkgs.rustup
-    pkgs.spotify
-    pkgs.tealdeer
-    pkgs.uv
-    pkgs.wl-clipboard
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.zellij
-    (pkgs.catppuccin-sddm.override {
+  environment.systemPackages = with pkgs; [ 
+    adwaita-qt
+    alacritty
+    avizo
+    clang
+    corepack_22
+    chezmoi
+    dunst
+    eza
+    fuzzel
+    fzf
+    google-chrome
+    kdePackages.polkit-kde-agent-1
+    kdePackages.qtwayland
+    libsForQt5.qt5.qtwayland
+    gnumake
+    lua-language-server
+    neovim
+    nodejs_22
+    nwg-look
+    openssl
+    playerctl
+    python312
+    python312Packages.pynvim
+    python312Packages.black
+    readline
+    ripgrep
+    rose-pine-cursor
+    rustup
+    spotify
+    tealdeer
+    uv
+    wl-clipboard
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+    zellij
+    (catppuccin-sddm.override {
       flavor = "mocha";
       font = "Noto Sans Mono";
       fontSize = "18";
