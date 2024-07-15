@@ -292,6 +292,9 @@ require("lazy").setup({
 	{
 		"nvimtools/none-ls.nvim",
 		lazy = false,
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+		},
 		config = function()
 			local null_ls = require 'null-ls'
 			null_ls.setup({
