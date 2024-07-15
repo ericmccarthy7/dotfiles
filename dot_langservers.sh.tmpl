@@ -2,6 +2,8 @@
 
 {{if eq .chezmoi.os "darwin" }}
 brew install lua-language-server black
+mkdir -p ~/.local/share/chezscripts
+curl -L https://github.com/dj95/zjstatus/releases/download/v0.17.0/zjstatus.wasm -o ~/.local/share/chezscripts/zjstatus.wasm
 {{- end}}
 
 rustup component add rust-analyzer
