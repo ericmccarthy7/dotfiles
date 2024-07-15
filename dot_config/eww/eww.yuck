@@ -1,7 +1,7 @@
 (defwindow          clock
                     :monitor 0
-                    :geometry (geometry :x "20px"
-                                        :y "20px"
+                    :geometry (geometry :x "0px"
+                                        :y "0px"
                                         :width "1px"
                                         :height "1px"
                                         :anchor "center")
@@ -18,7 +18,7 @@
                     :initial "initial-value"
                     :run-while time-visible
                     `date '+%A, %B %e, %Y'`)
-(defpoll time       :interval "1s"
+(defpoll time       :interval "10s"
                     :initial "initial-value"
                     :run-while time-visible
-                    `date '+%H:%M:%S'`)
+                    `date '+%H:%M'`)
