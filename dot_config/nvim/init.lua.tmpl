@@ -330,4 +330,7 @@ require("lazy").setup({
 	},
 	{ "tpope/vim-sleuth" },
 	{ "tpope/vim-surround" },
+	{{- if eq .work true }}
+	{ "github/copilot.vim" },
+	{{- end }}
 })
