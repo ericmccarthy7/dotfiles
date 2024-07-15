@@ -211,16 +211,12 @@ require("lazy").setup({
 					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 					vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
 					vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
-					-- format on save python
 					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = { "*.py" },
-						callback = function()
-							vim.cmd("Black")
-						end
-					})
-
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = { "*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx", "*.vue", "*.yaml", "*.yml", "*.json", "*.mjs", "*.html", "*.astro" },
+						pattern = {
+							"*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx",
+							"*.vue", "*.yaml", "*.yml", "*.json", "*.mjs",
+							"*.html", "*.astro", "*.py"
+						},
 						callback = function()
 							vim.lsp.buf.format { async = false }
 						end
@@ -293,7 +289,18 @@ require("lazy").setup({
 			}
 		end
 	},
-	{ "psf/black" },
+	{
+		"nvimtools/none-lis.nvim",
+		lazy = false,
+		config = function()
+			local null_ls = require 'null-ls'
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.black
+				},
+			})
+		end
+	},
 	{ "tpope/vim-commentary" },
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-obsession" },
