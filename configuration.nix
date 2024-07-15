@@ -24,6 +24,7 @@ in
   programs.hyprland.enable = true;
   programs.fish.enable = true;
   programs.thunar.enable = true;
+  programs.steam.enable = true;
 
   programs.git = {
     enable = true;
@@ -37,6 +38,7 @@ in
     avizo
     clang
     corepack_22
+    coreutils
     chezmoi
     dunst
     eza
@@ -139,6 +141,26 @@ in
     enable = true;
     platformTheme = "gnome";
     style = "adwaita-dark";
+  };
+
+  systemd.timers."rooster" = {
+    wantedBy = [ "timers.target" ];
+      timerConfig = {
+      	OnCalendar = "*-*-* *:*/15:00";
+      	Persistent = true;
+        Unit = "rooster.service";
+      };
+  };
+  
+  systemd.services."rooster" = {
+    script = ''
+      set -eu
+      notify-send "$(date)"
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "eric";
+    };
   };
 
   system.stateVersion = "24.05";
