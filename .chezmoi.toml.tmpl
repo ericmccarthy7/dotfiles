@@ -1,6 +1,8 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $brew_home := promptStringOnce . "brew_home" "If on mac add brew location" -}}
 {{- $work := promptBoolOnce . "work" "Is this a work laptop" -}}
 
 [data]
     email = {{ $email | quote }}
+    brew_home = {{ $brew_home | quote }}
     work = {{ $work }}
