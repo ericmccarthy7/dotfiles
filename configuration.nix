@@ -4,7 +4,7 @@ let
 home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
 in
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
       ./hardware-configuration.nix
       (import "${home-manager}/nixos")
     ];
@@ -31,7 +31,10 @@ in
     lfs.enable = true;
   };
 
+
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [ 
     adwaita-qt
     alacritty
@@ -41,6 +44,7 @@ in
     coreutils
     chezmoi
     dunst
+    eww
     eza
     ffmpeg
     fuzzel
@@ -143,27 +147,6 @@ in
     style = "adwaita-dark";
   };
 
-  systemd.timers."rooster" = {
-    wantedBy = [ "timers.target" ];
-      timerConfig = {
-      	OnCalendar = "*-*-* *:*/15:00";
-      	Persistent = true;
-        Unit = "rooster.service";
-      };
-  };
-  
-  systemd.services."rooster" = {
-    script = ''
-      set -eu
-      notify-send "$(date)"
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "eric";
-    };
-  };
-
   system.stateVersion = "24.05";
-
 }
 
