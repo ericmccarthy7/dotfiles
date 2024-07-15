@@ -73,5 +73,5 @@ themes {
 default_shell "fish"
 pane_frames false
 theme "rose-pine"
-default_layout "compact"
 simplified_ui true
+
