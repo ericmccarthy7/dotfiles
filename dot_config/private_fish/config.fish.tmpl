@@ -1,6 +1,8 @@
 if status is-interactive
 end
 
+set -U fish_greeting
+
 {{- if eq .chezmoi.os "darwin" }}
 export BREW_HOME="{{- .brew_home }}"
 export LDFLAGS="-L$BREW_HOME/opt/openssl@3/lib"
@@ -67,3 +69,8 @@ end
 
 setproxy
 {{- end }}
+
+# custom local fish configs and stuff
+if test -e ~/.local/share/chezscripts/local.fish
+    source ~/.local/share/chezscripts/local.fish
+end

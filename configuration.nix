@@ -2,12 +2,16 @@
 
 let
 home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+unstable = import 
+  (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable")
+  { config = config.nixpkgs.config; };
 in
 {
   imports = [
       ./hardware-configuration.nix
       (import "${home-manager}/nixos")
     ];
+
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -38,11 +42,15 @@ in
   environment.systemPackages = with pkgs; [ 
     adwaita-qt
     alacritty
+    audacity
     avizo
+    bitwig-studio
     clang
     corepack_22
     coreutils
     chezmoi
+    davinci-resolve-studio
+    discord
     dunst
     eww
     eza
@@ -63,7 +71,7 @@ in
     libsForQt5.qt5.qtwayland
     gnumake
     lua-language-server
-    neovim
+    unstable.neovim
     nodejs_22
     libnotify
     mpv
@@ -86,6 +94,7 @@ in
     wl-clipboard
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
+    yabridge
     zellij
     (catppuccin-sddm.override {
       flavor = "mocha";
