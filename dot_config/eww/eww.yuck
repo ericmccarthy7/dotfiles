@@ -4,7 +4,7 @@
                                         :y "20px"
                                         :width "1px"
                                         :height "1px"
-                                        :anchor "top right")
+                                        :anchor "center")
                                         :exclusive false
                                         :stacking "overlay"
                                         :focusable false
