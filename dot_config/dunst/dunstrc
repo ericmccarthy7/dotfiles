@@ -10,7 +10,7 @@
 
     ### Geometry ###
 
-    width = 600
+    width = 500
 
     height = 300
 
@@ -64,7 +64,7 @@
     padding = 6
 
     # Horizontal padding.
-    horizontal_padding = 6
+    horizontal_padding = 12
 
     # Padding between text and icon.
     text_icon_padding = 24
