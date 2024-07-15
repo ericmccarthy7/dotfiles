@@ -40,18 +40,25 @@ in
     chezmoi
     dunst
     eza
+    ffmpeg
     fuzzel
-    fzf
     google-chrome
     hyprlock
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
     kdePackages.polkit-kde-agent-1
     kdePackages.qtwayland
+    killall
     libsForQt5.qt5.qtwayland
     gnumake
     lua-language-server
     neovim
     nodejs_22
+    libnotify
+    mpv
     nwg-look
+    obs-studio
     openssl
     playerctl
     python312
@@ -65,6 +72,7 @@ in
     spotify
     tealdeer
     uv
+    vlc
     wl-clipboard
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
@@ -77,6 +85,7 @@ in
     })
   ];
 
+  services.jellyfin.enable = true;
   services.xserver = {
     enable = true;
     displayManager.setupCommands = "xrandr --output DP-1 --primary";
