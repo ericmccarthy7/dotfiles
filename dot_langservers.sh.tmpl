@@ -2,9 +2,10 @@
 
 {{if eq .chezmoi.os "darwin" }}
 brew install lua-language-server black
+{{- end}}
+
 mkdir -p ~/.local/share/chezscripts
 curl -L https://github.com/dj95/zjstatus/releases/download/v0.17.0/zjstatus.wasm -o ~/.local/share/chezscripts/zjstatus.wasm
-{{- end}}
 
 rustup component add rust-analyzer
 pnpm i -g pyright typescript typescript-language-server @astrojs/language-server
