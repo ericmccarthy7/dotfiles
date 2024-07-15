@@ -48,14 +48,18 @@ in
     eza
     ffmpeg
     fuzzel
+    gimp
     google-chrome
+    htop
     hyprlock
+    inkscape
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
     kdePackages.polkit-kde-agent-1
     kdePackages.qtwayland
     killall
+    krita
     libsForQt5.qt5.qtwayland
     gnumake
     lua-language-server
@@ -94,10 +98,19 @@ in
   services.jellyfin.enable = true;
   services.xserver = {
     enable = true;
-    displayManager.setupCommands = "xrandr --output DP-1 --primary";
   };
 
-  services.libinput.mouse.accelProfile = "flat";
+  services.libinput = {
+    enable = true;
+    mouse = {
+      accelProfile = "flat";
+      accelSpeed = "0";
+    };
+    touchpad = {
+      accelProfile = "flat";
+      accelSpeed = "0";
+    };
+  };
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
