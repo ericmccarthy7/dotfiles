@@ -1,3 +1,19 @@
+themes {
+    rose-pine {
+        bg "#403d52"
+        fg "#e0def4"
+        red "#eb6f92"
+        green "#31748f"
+        blue "#9ccfd8"
+        yellow "#f6c177"
+        magenta "#c4a7e7"
+        orange "#fe640b"
+        cyan "#ebbcba"
+        black "#26233a"
+        white "#e0def4"
+    }
+}
+
 layout {
     pane split_direction="vertical" {
         pane
@@ -7,21 +23,21 @@ layout {
         plugin location="file:~/.local/share/chezscripts/zjstatus.wasm" {
             hide_frame_for_single_pane "true"
 
-            format_left  "{mode}#[fg=#89B4FA,bg=#181825,bold] {tabs}"
+            format_left  "{mode}#[fg=white,bg=black,bold] {tabs}"
             format_right "{datetime}"
-            format_space "#[bg=#181825]"
+            format_space "#[bg=black]"
 
-            mode_normal          "#[bg=#89B4FA] "
-            mode_tmux            "#[bg=#ffc387] "
+            mode_normal          "#[bg=blue] "
+            mode_tmux            "#[bg=red] "
             mode_default_to_mode "tmux"
 
-            tab_normal               "#[fg=#6C7086,bg=#181825] {index} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-            tab_active               "#[fg=#9399B2,bg=#181825,bold,italic] {index} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_normal               "#[fg=fg,bg=black] {index} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_active               "#[fg=fg,bg=black,bold,italic] {index} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
             tab_fullscreen_indicator "□ "
             tab_sync_indicator       "  "
             tab_floating_indicator   "󰉈 "
 
-            datetime          "#[fg=#9399B2,bg=#181825] {format} "
+            datetime          "#[fg=white,bg=black] {format} "
             datetime_format   "%A, %d %b %Y %H:%M:%S"
             datetime_timezone "Europe/Berlin"
         }
