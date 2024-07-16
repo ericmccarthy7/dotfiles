@@ -68,11 +68,13 @@ in
     kdePackages.qtwayland
     killall
     krita
+    libinput
     libsForQt5.qt5.qtwayland
     gnumake
     lua-language-server
     unstable.neovim
     nodejs_22
+    parted
     libnotify
     mpv
     nwg-look
@@ -107,6 +109,16 @@ in
   services.jellyfin.enable = true;
   services.xserver = {
     enable = true;
+    config = ''
+      Section "InputClass"
+        Identifier "libinput pointer catchall"
+        MatchIsPointer "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "AccelProfile" "flat"
+        Option "Accel Profile Enabled" "1 0 0"
+      EndSection
+    '';
   };
 
   services.libinput = {
@@ -114,6 +126,10 @@ in
     mouse = {
       accelProfile = "flat";
       accelSpeed = "0";
+      additionalOptions = ''
+        Option "AccelProfile" "flat"
+        Option "Accel Profile Enabled" "1 0 0"
+      '';
     };
     touchpad = {
       accelProfile = "flat";
