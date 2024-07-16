@@ -22,7 +22,7 @@ in
   users.users.eric = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.fish;
+    shell = pkgs.bashInteractive;
   };
 
   programs.hyprland.enable = true;
