@@ -58,6 +58,7 @@ in
     fuzzel
     gimp
     google-chrome
+    guvcview
     htop
     hyprlock
     inkscape
