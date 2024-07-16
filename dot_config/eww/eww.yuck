@@ -1,10 +1,10 @@
 (defwindow          clock
                     :monitor 0
                     :geometry (geometry :x "0px"
-                                        :y "0px"
+                                        :y "80px"
                                         :width "1px"
                                         :height "1px"
-                                        :anchor "center")
+                                        :anchor "top center")
                                         :exclusive false
                                         :stacking "overlay"
                                         :focusable false
