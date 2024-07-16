@@ -1,17 +1,54 @@
+$base: #191724;
+$surface: #1f1d2e;
+$overlay: #26233a;
+$muted: #6e6a86;
+$subtle: #908caa;
+$text: #e0def4;
+$love: #eb6f92;
+$gold: #f6c177;
+$rose: #ebbcba;
+$pine: #31748f;
+$foam: #9ccfd8;
+$iris: #c4a7e7;
+$highlightLow: #21202e;
+$highlightMed: #403d52;
+$highlightHigh: #524f67;
+$font: "Noto Sans Mono";
+
+*{
+	font-family: $font;
+}
 .clock {
-	font-family: "Noto Sans Mono";
-	border: 1px solid white;
-	background-color: #26233a;
+	background-color: $base;
 	color: white;
 	padding: 1rem 3rem;
 }
 
 .date {
 	font-size: 1rem;
-	margin-top: -1rem;
 }
 
 .time {
-	margin-top: -2rem;
 	font-size: 5rem;
+}
+
+.res-circle {
+	color: $text;
+	background-color: $highlightLow;
+	border-radius: 100%;
+	padding: 0px;
+	margin: 1rem;
+}
+
+.res-circle-small {
+	background-color: $base;
+	font-size: 0.8rem;
+	padding: 1.5rem;
+}
+
+.weathericon {
+	color: $subtle;
+	font-family: Iosevka Nerd Font;
+	font-size: 2rem;
+	margin-right: 0.5rem;
 }
