@@ -66,6 +66,7 @@ in
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
+    jq
     kdePackages.polkit-kde-agent-1
     kdePackages.qtwayland
     killall
@@ -143,6 +144,7 @@ in
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    nerdfonts
   ];
 
 
@@ -241,7 +243,7 @@ in
 	bind = [
           "$mainMod, Q, killactive,"
           "CONTROL $mainMod, Q, exec, hyprlock"
-          "$mainMod, T, exec, eww open clock --toggle"
+          "$mainMod, T, exec, eww open clock --toggle --screen 0 && eww open clock --toggle --screen 1"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, Space, exec, $menu"
           "$mainMod, P, pseudo,"
