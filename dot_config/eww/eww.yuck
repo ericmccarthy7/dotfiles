@@ -1,4 +1,17 @@
-(defwindow clock
+(defwindow clock1
+  :monitor 0
+  :geometry (geometry :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "100%"
+    :anchor "top left"
+  )
+  :exclusive false
+  :stacking "overlay"
+  :focusable false
+  (datetime))
+
+(defwindow clock2
   :monitor 1
   :geometry (geometry :x "0px"
     :y "0px"

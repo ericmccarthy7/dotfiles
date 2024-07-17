@@ -18,7 +18,13 @@ $font: "Noto Sans Mono";
 *{
 	font-family: $font;
 }
-.clock {
+.clock1 {
+	background-color: $base;
+	color: white;
+	padding: 1rem 3rem;
+}
+
+.clock2 {
 	background-color: $base;
 	color: white;
 	padding: 1rem 3rem;
