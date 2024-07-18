@@ -68,7 +68,6 @@
   :run-while time-visible
   `date '+%H:%M'`)
 
-(defpoll WEATHER_CACHE :interval "30m" `bash ./scripts/weather --getdata`)
 (defpoll ICON :interval "15m" `bash ./scripts/weather --icon`)
 (defpoll TEMP :interval "15m" `bash ./scripts/weather --temp`)
 (defpoll HEX :interval "15m" `bash ./scripts/weather --hex`)

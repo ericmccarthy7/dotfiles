@@ -46,12 +46,14 @@ in
     alacritty
     audacity
     avizo
+    bash
     bitwig-studio
     btop
     clang
     corepack_22
     coreutils
     chezmoi
+    curl
     davinci-resolve-studio
     discord
     dunst
@@ -328,6 +330,33 @@ in
     enable = true;
     platformTheme = "gnome";
     style = "adwaita-dark";
+  };
+
+  systemd.timers."weather-update" = {
+    wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "30m";
+        OnUnitActiveSec = "30m";
+        Unit = "weather-update.service";
+      };
+  };
+  
+  systemd.services."weather-update" = {
+    script = ''
+      set -eu
+      date '+%Y-%m-%d %H:%M:%S'
+      bash /home/eric/.config/eww/scripts/weather --getdata
+    '';
+    path = [ 
+      pkgs.bash
+      pkgs.coreutils
+      pkgs.curl
+      pkgs.jq
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "eric";
+    };
   };
 
   system.stateVersion = "24.05";

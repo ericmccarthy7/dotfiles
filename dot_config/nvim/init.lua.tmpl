@@ -65,7 +65,9 @@ require("lazy").setup({
 		config = function()
 			local configs = require("nvim-treesitter.configs")
 			require 'nvim-treesitter.configs'.setup {
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown" },
+				ensure_installed = {
+						"c", "lua", "vim", "vimdoc", "query", "markdown", "just"
+					},
 				sync_install = false,
 				highlight = {
 					enable = true,
