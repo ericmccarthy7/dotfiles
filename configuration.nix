@@ -38,7 +38,7 @@ in
   };
 
 
-  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [ 
@@ -47,6 +47,7 @@ in
     audacity
     avizo
     bitwig-studio
+    btop
     clang
     corepack_22
     coreutils
@@ -66,6 +67,7 @@ in
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
+    just
     jq
     kdePackages.polkit-kde-agent-1
     kdePackages.qtwayland
@@ -118,11 +120,9 @@ in
     enable = true;
     mouse = {
       accelProfile = "flat";
-      accelSpeed = "0";
     };
     touchpad = {
       accelProfile = "flat";
-      accelSpeed = "0";
     };
   };
   services.openssh.enable = true;
@@ -243,7 +243,7 @@ in
 	bind = [
           "$mainMod, Q, killactive,"
           "CONTROL $mainMod, Q, exec, hyprlock"
-          "$mainMod, T, exec, eww open clock --toggle --screen 0 && eww open clock --toggle --screen 1"
+          "$mainMod, T, exec, eww open clock1 --toggle && eww open clock2 --toggle"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, Space, exec, $menu"
           "$mainMod, P, pseudo,"
@@ -297,8 +297,8 @@ in
       };
       extraConfig = ''
         input {
-	  accel_profile = "flat"
-	  force_no_accel = 1	
+	    accel_profile = "flat"
+	    force_no_accel = 1	
 	}
 
         device {
