@@ -21,7 +21,7 @@ in
 
   users.users.eric = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "atd" ];
     shell = pkgs.bashInteractive;
   };
 
@@ -48,6 +48,7 @@ in
     avizo
     bash
     bitwig-studio
+    bitwarden-desktop
     btop
     clang
     corepack_22
@@ -104,6 +105,7 @@ in
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
     yabridge
+    zathura
     zellij
     (catppuccin-sddm.override {
       flavor = "mocha";
@@ -115,6 +117,10 @@ in
 
   services.jellyfin.enable = true;
   services.xserver = {
+    enable = true;
+  };
+
+  services.atd = {
     enable = true;
   };
 
