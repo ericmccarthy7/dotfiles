@@ -61,6 +61,7 @@ in
     eww
     eza
     ffmpeg
+    firefox
     fuzzel
     gimp
     google-chrome
@@ -94,12 +95,14 @@ in
     python312Packages.black
     readline
     ripgrep
+    rocmPackages.rocm-smi
     rose-pine-cursor
     ruff
     rustup
     spotify
     tealdeer
     uv
+    via
     vlc
     wl-clipboard
     xdg-desktop-portal-gtk
@@ -147,6 +150,7 @@ in
     theme = "catppuccin-mocha";
     package = pkgs.kdePackages.sddm;
   };
+  services.udev.packages = [ pkgs.via ];
   
   fonts.packages = with pkgs; [
     noto-fonts
@@ -156,6 +160,8 @@ in
   ];
 
 
+
+  hardware.keyboard.qmk.enable = true;
   
   home-manager.backupFileExtension = "hmbak";
 
@@ -254,7 +260,6 @@ in
           "$mainMod, T, exec, eww open clock1 --toggle && eww open clock2 --toggle"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, Space, exec, $menu"
-          "$mainMod, P, pseudo,"
           "ALT SHIFT, 1, workspace, 1"
           "ALT SHIFT, 2, workspace, 2"
           "ALT SHIFT, 3, workspace, 3"
