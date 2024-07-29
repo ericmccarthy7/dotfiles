@@ -49,13 +49,14 @@ in
     bash
     bitwig-studio
     bitwarden-desktop
+    blender
     btop
     clang
     corepack_22
     coreutils
     chezmoi
     curl
-    davinci-resolve-studio
+    davinci-resolve
     discord
     dunst
     eww
@@ -162,6 +163,12 @@ in
 
 
   hardware.keyboard.qmk.enable = true;
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+    ];
+  };
   
   home-manager.backupFileExtension = "hmbak";
 
