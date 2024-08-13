@@ -70,6 +70,7 @@ in
     guvcview
     htop
     inkscape
+    isoimagewriter
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
@@ -104,7 +105,6 @@ in
     spotify
     tealdeer
     uv
-    ventoy
     via
     vlc
     wl-clipboard
