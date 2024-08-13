@@ -47,6 +47,7 @@ in
     audacity
     avizo
     bash
+    beeper
     bitwig-studio
     bitwarden-desktop
     blender
@@ -103,6 +104,7 @@ in
     spotify
     tealdeer
     uv
+    ventoy
     via
     vlc
     wl-clipboard
@@ -169,6 +171,7 @@ in
       rocmPackages.clr.icd
     ];
   };
+  hardware.xone.enable = true;
   
   home-manager.backupFileExtension = "hmbak";
 
@@ -370,6 +373,41 @@ in
       pkgs.coreutils
       pkgs.curl
       pkgs.jq
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "eric";
+    };
+  };
+
+  systemd.timers."network-monitor" = {
+    wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "10s";
+        OnUnitActiveSec = "10s";
+        Unit = "network-monitor.service";
+      };
+  };
+  systemd.services."network-monitor" = {
+    script = ''
+      set -eu
+      d=`date '+%Y-%m-%d %H:%M:%S'`
+      f=/home/eric/projects/network-monitor/tmp.offline
+      if wget -q --spider http://google.com; then
+        if [ -f $f ] ; then
+            echo "back online $d" >> /home/eric/projects/network-monitor/out.log
+            rm -f $f
+        fi
+      else
+        echo "offline $d" >> /home/eric/projects/network-monitor/out.log
+        touch $f
+      fi
+    '';
+    path = [ 
+      pkgs.bash
+      pkgs.coreutils
+      pkgs.curl
+      pkgs.wget
     ];
     serviceConfig = {
       Type = "oneshot";
