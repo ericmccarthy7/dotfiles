@@ -317,8 +317,7 @@ in
           force_no_accel = 1;
         };
 	windowrulev2 = [
-	  "noinitialfocus,title:tds"
-	  "workspace 6,title:tds"
+	  "workspace 6 silent,title:tds"
 	];
       };
       extraConfig = ''
