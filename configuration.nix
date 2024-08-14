@@ -70,7 +70,6 @@ in
     guvcview
     htop
     inkscape
-    isoimagewriter
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
@@ -317,6 +316,10 @@ in
           accel_profile = "flat";
           force_no_accel = 1;
         };
+	windowrulev2 = [
+	  "noinitialfocus,title:tds"
+	  "workspace 6,title:tds"
+	];
       };
       extraConfig = ''
         input {
