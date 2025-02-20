@@ -5,8 +5,8 @@ set -U fish_greeting
 
 {{- if eq .chezmoi.os "darwin" }}
 export BREW_HOME="{{- .brew_home }}"
-export LDFLAGS="-L$BREW_HOME/opt/openssl@3/lib"
-export CPPFLAGS="-I$BREW_HOME/opt/openssl@3/include"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib -L$BREW_HOME/opt/openssl@3/lib -lunwind"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include -I$BREW_HOME/opt/openssl@3/include"
 export PKG_CONFIG_PATH="$BREW_HOME/opt/openssl@3/lib/pkgconfig"
 export EDITOR="$BREW_HOME/bin/nvim"
 export VISUAL="$BREW_HOME/bin/nvim"
