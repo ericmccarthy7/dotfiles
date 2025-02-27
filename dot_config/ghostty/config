@@ -1,0 +1,7 @@
+command = /opt/homebrew/bin/fish --login --interactive
+font-family = Noto Sans Mono
+font-style = "SemiCondensed"
+font-size = 16
+font-variation = wght=400
+shell-integration = fish
+theme = rose-pine
