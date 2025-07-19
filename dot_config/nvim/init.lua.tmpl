@@ -82,15 +82,27 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 		lazy = true,
-		ft = { "rust" },
+		ft = {
+			"rust",
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+			"python",
+		},
 		config = function ()
 			vim.diagnostic.config({ virtual_text = true })
-			vim.lsp.enable('rust_analyzer')
+			vim.lsp.enable("rust_analyzer")
+			vim.lsp.enable("ts_ls")
+			vim.lsp.enable("ty")
 
 			-- auto format
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				pattern = {
 					"*.rs",
+					"*.[jt]s",
+					"*.[jt]sx",
+					"*.py"
 				},
 				callback = function()
 					vim.lsp.buf.format { async = false }
@@ -102,7 +114,14 @@ require("lazy").setup({
 		"saghen/blink.cmp",
 		build = "cargo build --release",
 		lazy = true,
-		ft = { "rust" },
+		ft = {
+			"rust",
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+			"python",
+		},
 		opts = {
 			fuzzy = { implementation = "rust" },
 		}
