@@ -30,6 +30,7 @@ vim.keymap.set('n', '<leader>r', '<cmd>Rg<cr>')
 vim.keymap.set('n', '<leader>b', '<cmd>Buffers<cr>')
 vim.keymap.set('n', '<leader>.', '<cmd>Oil<cr>')
 vim.keymap.set('n', '<leader>vrc', '<cmd>e $MYVIMRC<cr>')
+
 vim.keymap.set('ia', 'dts', vim.fn.strftime("%Y-%m-%d"))
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -59,23 +60,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			local configs = require("nvim-treesitter.configs")
-			require 'nvim-treesitter.configs'.setup {
-				ensure_installed = {
-						"c", "lua", "vim", "vimdoc", "query", "markdown", "just"
-					},
-				sync_install = false,
-				highlight = {
-					enable = true,
-				}
-			}
-		end
-	},
-	{ "nvim-treesitter/nvim-treesitter-context" },
-	{
 		"stevearc/oil.nvim",
 		config = function()
 			require("oil").setup({
@@ -95,209 +79,39 @@ require("lazy").setup({
 			vim.g.fzf_preview_window = {}
 		end
 	},
-
-
 	{
-		'vimwiki/vimwiki',
-		init = function()
-			vim.g.vimwiki_list = {
-				{
-					syntax = 'markdown',
-					ext = '.md',
-				}
-			}
-			vim.g.vim_markdown_new_list_item_indent = 0
-		end
-	},
-	{
-		'neovim/nvim-lspconfig',
-		config = function()
-			local lspconfig = require('lspconfig')
-			-- rust
-			lspconfig.rust_analyzer.setup {
-				-- `:help lspconfig-setup`
-				settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
-							targetDir = true,
-						},
-						imports = {
-							group = {
-								enable = false,
-							},
-						},
-						completion = {
-							postfix = {
-								enable = false,
-							},
-						},
-					},
+		"neovim/nvim-lspconfig",
+		lazy = true,
+		ft = { "rust" },
+		config = function ()
+			vim.diagnostic.config({ virtual_text = true })
+			vim.lsp.enable('rust_analyzer')
+
+			-- auto format
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				pattern = {
+					"*.rs",
 				},
-			}
-
-			-- python
-			lspconfig.pyright.setup {}
-
-			-- javascript
-			lspconfig.ts_ls.setup {
-				filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-			}
-
-			lspconfig.astro.setup {}
-
-			-- vuejs
-			lspconfig.volar.setup {}
-
-			-- lua
-			lspconfig.lua_ls.setup {
-				settings = {
-					Lua = {
-						runtime = {
-							-- Tell the language server which version of Lua you're using
-							-- (most likely LuaJIT in the case of Neovim)
-							version = 'LuaJIT',
-						},
-						diagnostics = {
-							-- Get the language server to recognize the `vim` global
-							globals = {
-								'vim',
-								'require'
-							},
-						},
-						workspace = {
-							-- Make the server aware of Neovim runtime files
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
-						-- Do not send telemetry data containing a randomized but unique identifier
-						telemetry = {
-							enable = false,
-						},
-					},
-				},
-			}
-
-			-- yaml
-			lspconfig.yamlls.setup {
-				settings = {
-					yaml = {
-						format = {
-							enable = true
-						}
-					}
-				}
-			}
-
-			-- json
-			lspconfig.jsonls.setup {}
-
-			-- bash
-			lspconfig.bashls.setup {}
-
-			-- angular
-			lspconfig.angularls.setup {}
-
-			-- html
-			lspconfig.html.setup {}
-
-			vim.api.nvim_create_autocmd('LspAttach', {
-				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-				callback = function(ev)
-					-- Enable completion triggered by <c-x><c-o>
-					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-					local opts = { buffer = ev.buf }
-					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-					vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-					vim.keymap.set('n', 'gR', vim.lsp.buf.rename, opts)
-					vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-					vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
-					vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = {
-							"*.rs", "*.lua", "*.js", "*.jsx", "*.ts", "*.tsx",
-							"*.vue", "*.yaml", "*.yml", "*.json", "*.mjs",
-							"*.html", "*.astro", "*.py"
-						},
-						callback = function()
-							vim.lsp.buf.format { async = false }
-						end
-					})
-				end,
-
+				callback = function()
+					vim.lsp.buf.format { async = false }
+				end
 			})
-		end
+		end,
 	},
-	{ 
+	{
 		"saghen/blink.cmp",
-		version = '1.*',
+		build = "cargo build --release",
+		lazy = true,
+		ft = { "rust" },
 		opts = {
-			keymap = {
-				preset = 'default'
-			},
-		},
-		opts_extend = { "sources.default" }
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		lazy = false,
-		dependencies = {
-			'rose-pine/neovim',
-		},
-		config = function()
-			require 'lualine'.setup {
-				options = {
-					theme = "rose-pine-alt",
-					icons_enabled = false,
-					section_separators = "",
-					component_separators = "",
-				}
-			}
-		end
-	},
-	{
-		"nvimtools/none-ls.nvim",
-		lazy = false,
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-		},
-		config = function()
-			local null_ls = require 'null-ls'
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.black
-				},
-			})
-		end
+			fuzzy = { implementation = "rust" },
+		}
 	},
 	{ "tpope/vim-commentary" },
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-obsession" },
 	{ "tpope/vim-repeat" },
-	{
-		"tpope/vim-rhubarb",
-		config = function()
-			vim.api.nvim_create_user_command(
-				"Browse",
-				function(opts)
-					{{- if eq .chezmoi.os "darwin" }}
-					vim.fn.system { "open", opts.fargs[1] }
-					{{- end }}
-					{{- if eq .chezmoi.os "linux" }}
-					vim.fn.system { "xdg-open", opts.fargs[1] }
-					{{- end }}
-				end,
-				{ nargs = 1 }
-			)
-			{{- if eq .work true }}
-			vim.g.github_enterprise_urls = { "https://rbcgithub.fg.rbc.com" }
-			{{- end }}
-		end
-	},
+	{ "tpope/vim-rhubarb" },
 	{ "tpope/vim-sleuth" },
 	{ "tpope/vim-surround" },
-	{{- if eq .work true }}
-	{ "github/copilot.vim" },
-	{{- end }}
-	{ "elkowar/yuck.vim" },
 })
