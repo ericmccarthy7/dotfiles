@@ -3,13 +3,13 @@ local config = wezterm.config_builder()
 local theme = require('lua/rose-pine').main
 local act = wezterm.action
 
-config.default_prog = { '/opt/homebrew/bin/fish' }
+config.default_prog = { 'fish' }
 
 config.colors = theme.colors()
 config.window_decorations = 'NONE'
 
 config.font = wezterm.font('Noto Sans Mono', { stretch = 'SemiCondensed' })
-config.font_size = 16.0
+config.font_size = 12.0
 
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
