@@ -18,7 +18,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = 15x15
+    offset = (15, 15)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -75,7 +75,7 @@
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#8EC07C"
+    frame_color = "#ffffff"
 
     # Define a color for the separator.
     # possible values are:
@@ -275,8 +275,8 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    frame_color = "#3B7C87"
-    foreground = "#3B7C87"
+    frame_color = "#ffffff"
+    foreground = "#ffffff"
     background = "#191311"
     #background = "#2B313C"
     timeout = 4
@@ -284,8 +284,8 @@
     #default_icon = /path/to/icon
 
 [urgency_normal]
-    frame_color = "#5B8234"
-    foreground = "#5B8234"
+    frame_color = "#ffffff"
+    foreground = "#ffffff"
     background = "#191311"
     #background = "#2B313C"
     timeout = 6
@@ -293,8 +293,8 @@
     #default_icon = /path/to/icon
 
 [urgency_critical]
-    frame_color = "#B7472A"
-    foreground = "#B7472A"
+    frame_color = "#ffffff"
+    foreground = "#ffffff"
     background = "#191311"
     #background = "#2B313C"
     timeout = 8
