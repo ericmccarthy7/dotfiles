@@ -40,4 +40,8 @@ wezterm.on('update-right-status', function(window, _)
 	})
 end)
 
+{{- if eq .chezmoi.hostname "mediabox" }}
+config.front_end = "OpenGL"
+{{- end }}
+
 return config
