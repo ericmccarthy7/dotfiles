@@ -9,7 +9,7 @@ config.colors = theme.colors()
 config.window_decorations = 'NONE'
 
 config.font = wezterm.font('Noto Sans Mono', { stretch = 'SemiCondensed' })
-config.font_size = 12.0
+config.font_size = 16.0
 
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
