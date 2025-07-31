@@ -3,7 +3,11 @@ local config = wezterm.config_builder()
 local theme = require('lua/rose-pine').main
 local act = wezterm.action
 
+{{- if eq .chezmoi.os "linux" }}
 config.default_prog = { 'fish' }
+{{- else if eq .chezmoi.os "darwin" }}
+config.default_prog = { '/opt/homebrew/bin/fish' }
+{{- end }}
 
 config.colors = theme.colors()
 config.window_decorations = 'NONE'
