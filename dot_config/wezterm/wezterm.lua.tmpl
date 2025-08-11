@@ -32,10 +32,12 @@ config.keys = {
 	{ key = '[', mods = 'LEADER', action = act.ActivateCopyMode },
 }
 
+--[[
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
 	window:gui_window():toggle_fullscreen()
 end)
+--]]
 
 wezterm.on('update-right-status', function(window, _)
 	local date = wezterm.strftime '%m-%d %H:%M:%S'
@@ -44,9 +46,5 @@ wezterm.on('update-right-status', function(window, _)
 		{ Text = date },
 	})
 end)
-
-{{- if eq .chezmoi.hostname "mediabox" }}
-config.front_end = "OpenGL"
-{{- end }}
 
 return config
