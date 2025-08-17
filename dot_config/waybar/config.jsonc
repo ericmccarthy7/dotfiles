@@ -1,0 +1,27 @@
+{
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 24, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "privacy",
+        "wireplumber"
+    ],
+    "hyprland/workspaces": {
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "format": "{:%H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip": false
+    },
+    "privacy": {
+        "icon-size": 13
+    }
+}
