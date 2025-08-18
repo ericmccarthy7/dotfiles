@@ -93,6 +93,15 @@ require("lazy").setup({
 		},
 		config = function ()
 			vim.diagnostic.config({ virtual_text = true })
+			vim.lsp.config('rust_analyzer', {
+				settings = {
+					['rust-analyzer'] = {
+						cargo = {
+							targetDir = "target/rust-analyzer"
+						}
+					}
+				}
+			})
 			vim.lsp.enable("rust_analyzer")
 			vim.lsp.enable("ts_ls")
 			vim.lsp.enable("ruff")
