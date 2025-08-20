@@ -16,6 +16,7 @@ export REQUESTS_CA_BUNDLE="$HOME/Documents/certs.pem"
 export SSL_CERT_FILE="$HOME/Documents/certs.pem"
 export VAULT_CAPATH="$HOME/Documents/certs.pem"
 export NODE_EXTRA_CA_CERTS="$HOME/Documents/certs.pem"
+export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
 {{- end }}
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -24,9 +25,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$BREW_HOME/opt/libpq/bin:$PATH"
 export PATH="$BREW_HOME/bin:$PATH"
 export PATH="$BREW_HOME/sbin:$PATH"
-export PATH="/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
-export PATH="/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin:$PATH"
-export PATH="/Users/ericmccarthy/source/ols:$PATH"
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 export PATH="$HOME/bin:$PATH"
@@ -36,6 +34,9 @@ export VISUAL="nvim"
 {{- if eq .work false }}
 export PATH="$HOME/.moon/bin:$PATH"
 export PATH="$HOME/.docker/bin:$PATH"
+export PATH="/Users/ericmccarthy/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+export PATH="/Users/ericmccarthy/Library/Application Support/pypoetry/venv/bin:$PATH"
+export PATH="/Users/ericmccarthy/source/ols:$PATH"
 {{- end }}
 
 alias vi="nvim"

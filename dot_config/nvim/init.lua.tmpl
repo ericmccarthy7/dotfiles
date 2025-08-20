@@ -90,6 +90,7 @@ require("lazy").setup({
 			"typescriptreact",
 			"python",
 			"yaml",
+			"godot",
 		},
 		config = function ()
 			vim.diagnostic.config({ virtual_text = true })
@@ -107,6 +108,7 @@ require("lazy").setup({
 			vim.lsp.enable("ruff")
 			vim.lsp.enable("ty")
 			vim.lsp.enable("yamlls")
+			vim.lsp.enable('gdscript')
 
 			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
 			vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { noremap = true, silent = true })
@@ -137,6 +139,7 @@ require("lazy").setup({
 			"typescriptreact",
 			"python",
 			"yaml",
+			"godot",
 		},
 		opts = {
 			fuzzy = { implementation = "rust" },
