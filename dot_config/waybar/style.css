@@ -50,20 +50,27 @@ window#waybar {
     box-shadow: inset 0 -3px #ffffff;
 }
 
-#simpleclock,
-#wireplumber
+#clock
  {
-    padding: 0 10px;
+    padding: 0 10px 0 0;
     color: #ffffff;
 }
 
-#wireplumber {
+
+#cpu {
+    padding: 0 0 0 5px;
+}
+
+#custom-gpu-label,
+#custom-cpu-label,
+#temperature,
+#cpu,
+#temperature,
+#custom-gpu-temp,
+#custom-gpu-perc {
     color: @muted;
+    padding: 0 0 0 5px;
 }
-
-#wireplumber.muted {
-}
-
 
 #privacy {
     padding: 0;

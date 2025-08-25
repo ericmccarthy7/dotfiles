@@ -1,0 +1,58 @@
+{
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 24, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        {{- if and (ne .chezmoi.hostname "mediabox") (eq .chezmoi.os "linux" ) }}
+        "custom/cpu-label",
+        "cpu",
+        "temperature",
+        "custom/gpu-label",
+        "custom/gpu-perc",
+        "custom/gpu-temp"
+        {{- end }}
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "privacy",
+        "clock"
+    ],
+    "hyprland/workspaces": {
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "format": "{:%H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip": false
+    },
+    "privacy": {
+        "icon-size": 13
+    },
+    "cpu": {
+        "interval": 2
+    },
+    "temperature": {
+        "interval": 2
+    },
+    {{- if and (ne .chezmoi.hostname "mediabox") (eq .chezmoi.os "linux" ) }}
+    "custom/gpu-perc": {
+        "exec": "~/scripts/amd_perc.sh",
+        "format": "{}%",
+        "interval": 2
+    },
+    "custom/gpu-temp": {
+        "exec": "~/scripts/amd_temp.sh",
+        "format": "{}°C",
+        "interval": 2
+    },
+    "custom/cpu-label": {
+        "format": "CPU:"
+    },
+    "custom/gpu-label": {
+        "format": "GPU:"
+    }
+    {{- end }}
+}
