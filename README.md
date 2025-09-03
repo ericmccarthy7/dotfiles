@@ -19,6 +19,12 @@
 	work = false
 ```
 
+### Installed packages (cargo)
+
+```
+cargo install ripgrep tealdeer fd-find eza
+```
+
 ### Installed packages (arch)
 
 - careful because some stuff is amd / nvidia / intel specific
