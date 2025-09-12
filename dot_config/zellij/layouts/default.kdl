@@ -20,7 +20,7 @@ layout {
     }
 
     pane size=1 borderless=true {
-        plugin location="file:~/.local/share/chezscripts/zjstatus.wasm" {
+        plugin location="file:~/scripts/zjstatus.wasm" {
             hide_frame_for_single_pane "true"
 
             format_left  "{mode}#[fg=white,bg=black,bold] {tabs}"
