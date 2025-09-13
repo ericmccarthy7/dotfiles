@@ -8,8 +8,8 @@ wait_for_window() {
 }
 
 hyprctl dispatch workspace 2
-wezterm &
-wait_for_window "wezterm"
+foot &
+wait_for_window "foot"
 
 hyprctl dispatch workspace 1
 firefox &
