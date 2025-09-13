@@ -37,7 +37,7 @@
     "temperature": {
         "interval": 2
     },
-    {{- if and (and (ne .chezmoi.hostname "mediabox") (ne .chezmoi.hostname "lovebook")) (eq .chezmoi.os "linux" ) }}
+    {{- if and (and (ne .chezmoi.hostname "mediabox") (ne .chezmoi.hostname "thinkbook")) (eq .chezmoi.os "linux" ) }}
     "custom/gpu-perc": {
         "exec": "~/scripts/amd_perc.sh",
         "format": "{}%",

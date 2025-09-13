@@ -132,7 +132,7 @@ bindl = , XF86AudioPlay, exec, playerctl play-pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 bindl = , XF86AudioNext, exec, playerctl next
 
-{{- if and (and (ne .chezmoi.hostname "mediabox") (ne .chezmoi.hostname "lovebook")) (eq .chezmoi.os "linux" ) }}
+{{- if and (and (ne .chezmoi.hostname "mediabox") (ne .chezmoi.hostname "thinkbook")) (eq .chezmoi.os "linux" ) }}
 monitor = DP-1,3840x2160@60.00Hz,1920x0,2
 monitor = DP-2,1920x1080@239.76Hz,0x0,1
 workspace=1,monitor:DP-1
