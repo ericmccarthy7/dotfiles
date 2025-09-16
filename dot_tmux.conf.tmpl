@@ -1,6 +1,12 @@
+{{- if eq .chezmoi.os "linux" }}
 set -g default-shell /usr/bin/fish
 set -g default-terminal "foot"
 set -a terminal-features "foot:RGB"
+{{- else if eq .chezmoi.os "darwin" }}
+set -g default-shell /opt/homebrew/bin/fish
+set -g default-terminal "ghostty"
+set -a terminal-features "ghostty:RGB"
+{{- end }}
 set -g mouse on
 set -g renumber-windows on
 set -g status-style 'bg=#2a273f,fg=terminal'
